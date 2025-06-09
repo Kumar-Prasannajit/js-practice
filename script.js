@@ -1,41 +1,55 @@
-      function calculateSum(num1, num2) {
+// Calculator ->
+
+function calculateSum(num1, num2) {
     return num1 + num2;
-  }
+}
 
-  console.log(calculateSum(2, 5));
-  console.log(calculateSum(10, 10));
-  console.log(calculateSum(5, 5));
+console.log(calculateSum(2, 5));
+console.log(calculateSum(10, 10));
+console.log(calculateSum(5, 5));
 
-  function calculateDifference(num1, num2) {
+function calculateDifference(num1, num2) {
     return num1 - num2;
-  }
+}
 
-  console.log(calculateDifference(22, 5));
-  console.log(calculateDifference(12, 1));
-  console.log(calculateDifference(17, 9));
+console.log(calculateDifference(22, 5));
+console.log(calculateDifference(12, 1));
+console.log(calculateDifference(17, 9));
 
-  function calculateProduct(num1, num2) {
+function calculateProduct(num1, num2) {
     return num1 * num2;
-  }
+}
 
-  console.log(calculateProduct(13, 5));
+console.log(calculateProduct(13, 5));
 
 
-  function calculateQuotient(num1, num2) {
+function calculateQuotient(num1, num2) {
     return num2 === 0 ? "Error: Division by zero" : num1 / num2;
-  }
+}
 
-  console.log(calculateQuotient(7, 11));
-  console.log(calculateQuotient(3, 0));
+console.log(calculateQuotient(7, 11));
+console.log(calculateQuotient(3, 0));
 
-  function calculateSquare(num) {
+function calculateSquare(num) {
     return num ** 2;
-  }
+}
 
-  console.log(calculateSquare(2));
-  console.log(calculateSquare(9));
+console.log(calculateSquare(2));
+console.log(calculateSquare(9));
 
-  function calculateSquareRoot(num) {
+function calculateSquareRoot(num) {
     return Math.sqrt(num);
-  }
+}
 
+// email masker ->
+
+function maskEmail(email){
+  const indexof = email.indexOf("@");
+  const username = email.slice(0, indexof);
+  const maskedPart = username.slice(1,-1);
+  const domain = email.slice(indexof);
+  const mask = maskedPart.replace(/./g, "*");
+  return `${username[0]}${mask}${username[username.length - 1]}${domain}`;
+}
+let email = "apple.pie@example.com";
+console.log(maskEmail(email));
