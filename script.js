@@ -100,3 +100,13 @@ function isLeapYear(num) {
 const year = 2024; 
 const result = isLeapYear(year);
 console.log(result);
+
+// Truncate String ->
+
+function truncateString(str, num){
+  if(str.length <= num){
+    return str;
+  }else{
+    return str.slice(0, num) + "...";
+  }
+}
