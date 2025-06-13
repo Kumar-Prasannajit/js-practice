@@ -180,3 +180,25 @@ console.log(sendingAutoemail(mailid)(sub)(dets));
 
 const sendmail = (id) => (subj) => (content) => `sending email: ${id}, subject: ${subj}-${content}`;
 console.log(sendmail("adi@devicePixelRatio.com")("order cancelled")("order has been cancelled"));
+
+//composing functions
+
+function summation(a, b) {
+    return a + b;
+}
+
+function square(num) {
+    return num * num;
+}
+
+function compose2functions(func1, func2) {
+    return function(a, b) {
+        return func2(func1(a, b));
+    };
+}
+const squareOfSum = (compose2functions(summation, square));
+console.log(squareOfSum(2, 3)); // Output: 25 (since (2 + 3)^2 = 25)
+
+// another way to compose functions
+const c2f = (fn1, fn2) => (a, b) => fn2(fn1(a, b));
+console.log(c2f(summation, square)(4, 5)); // Output: 81 (since (4 + 5)^2 = 81)
