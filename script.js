@@ -148,14 +148,14 @@ console.log(counter.value()); // 1.
 
 //currying
 
-function add(a){
+function add3(a){
   return function (b){
     return function(c){
       return a + b + c;
     }
   }
 }
-console.log(add(2)(3)(5))
+console.log(add3(2)(3)(5))
 //another way
 
 const addN = (a) => (b) => (c) => a + b + c;
@@ -206,13 +206,18 @@ console.log(c2f(summation, square)(4, 5)); // Output: 81 (since (4 + 5)^2 = 81)
 // compose anynumber of functions
 function compose(...fns){
   return function(...values){
-    return fns.reduceRight((acc, fn) => {
-      return fn(...acc);
-    }, values);
-  }
+    return fns.reduce((a, b) => b(a), values);
+  };
 }
-const add = (a, b) => a + b;
-const multiply = (a, b) => a * b; 
-const subtract = (a, b) => a - b;
-const composedFunction = compose(subtract, multiply, add);
-console.log(composedFunction(2, 3, 4)); // Output: -10 (since (2 + 3) * 4 - 5 = -10)
+
+const multiply = (args) => args[0] * args[1];
+function squareNumber(num) {
+    return num * num;
+}
+const finalValue = compose(multiply, squareNumber);
+console.log(finalValue(2, 3));
+
+// Another way to compose any number of functions
+const composeAny = (...fns) => (...vals) => fns.reduce((a, b) => b(a), vals);
+let coposeAll = composeAny(multiply, squareNumber, (num) => num + 1);
+console.log(coposeAll(2, 3)); // Output: 37 (since ((2 * 3)^2) + 1 = 37)
