@@ -202,3 +202,17 @@ console.log(squareOfSum(2, 3)); // Output: 25 (since (2 + 3)^2 = 25)
 // another way to compose functions
 const c2f = (fn1, fn2) => (a, b) => fn2(fn1(a, b));
 console.log(c2f(summation, square)(4, 5)); // Output: 81 (since (4 + 5)^2 = 81)
+
+// compose anynumber of functions
+function compose(...fns){
+  return function(...values){
+    return fns.reduceRight((acc, fn) => {
+      return fn(...acc);
+    }, values);
+  }
+}
+const add = (a, b) => a + b;
+const multiply = (a, b) => a * b; 
+const subtract = (a, b) => a - b;
+const composedFunction = compose(subtract, multiply, add);
+console.log(composedFunction(2, 3, 4)); // Output: -10 (since (2 + 3) * 4 - 5 = -10)
