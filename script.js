@@ -110,3 +110,50 @@ function truncateString(str, num){
     return str.slice(0, num) + "...";
   }
 }
+
+// closure example ->
+// This is an example of a closure that maintains a private counter.
+
+const counter = (function () {
+  let privateCounter = 0;
+
+  function changeBy(val) {
+    privateCounter += val;
+  }
+
+  return {
+    increment() {
+      changeBy(1);
+    },
+
+    decrement() {
+      changeBy(-1);
+    },
+
+    value() {
+      return privateCounter;
+    },
+  };
+})();
+
+console.log(counter.value()); // 0.
+
+counter.increment();
+counter.increment();
+console.log(counter.value()); // 2.
+
+counter.decrement();
+console.log(counter.value()); // 1.
+
+
+//currying
+
+function add(a){
+  return function (b){
+    return function(c){
+      return a + b + c;
+    }
+  }
+}
+
+console.log(add(2)(3)(5))
