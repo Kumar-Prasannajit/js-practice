@@ -157,3 +157,18 @@ function add(a){
 }
 
 console.log(add(2)(3)(5))
+
+//curring example
+
+function sendingAutoemail(to){
+  return function (subject){
+    return function(content){
+      return `sending email: ${to}, subject: ${subject}-${content}`
+    }
+  }
+}
+
+let mailid = "aditya@example.com";
+let sub = "order confirmed";
+let dets = "Dear Sir your order has been confirmed. Order ID: 122212"
+console.log(sendingAutoemail(mailid)(sub)(dets));
