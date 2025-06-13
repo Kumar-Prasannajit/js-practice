@@ -155,8 +155,11 @@ function add(a){
     }
   }
 }
-
 console.log(add(2)(3)(5))
+//another way
+
+const addN = (a) => (b) => (c) => a + b + c;
+console.log(addN(1)(2)(3));
 
 //curring example
 
@@ -172,3 +175,8 @@ let mailid = "aditya@example.com";
 let sub = "order confirmed";
 let dets = "Dear Sir your order has been confirmed. Order ID: 122212"
 console.log(sendingAutoemail(mailid)(sub)(dets));
+
+// Another way
+
+const sendmail = (id) => (subj) => (content) => `sending email: ${id}, subject: ${subj}-${content}`;
+console.log(sendmail("adi@devicePixelRatio.com")("order cancelled")("order has been cancelled"));
