@@ -221,3 +221,14 @@ console.log(finalValue(2, 3));
 const composeAny = (...fns) => (...vals) => fns.reduce((a, b) => b(a), vals);
 let coposeAll = composeAny(multiply, squareNumber, (num) => num + 1);
 console.log(coposeAll(2, 3)); // Output: 37 (since ((2 * 3)^2) + 1 = 37)
+
+//simple compose function
+function simpleCompose(...fns) {
+    return function(...args) {
+        return fns.reduceRight((acc, fn) => [fn(...acc)], args)[0];
+    };
+}
+const add = (a, b) => a + b;
+const multiplyByTwo = (num) => num * 2;
+const composedFunction = simpleCompose(multiplyByTwo, add);
+console.log(composedFunction(2, 3)); // Output: 10 (since (2 + 3) * 2 = 10)
