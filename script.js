@@ -232,3 +232,74 @@ const add = (a, b) => a + b;
 const multiplyByTwo = (num) => num * 2;
 const composedFunction = simpleCompose(multiplyByTwo, add);
 console.log(composedFunction(2, 3)); // Output: 10 (since (2 + 3) * 2 = 10)
+
+//IIFE: Immediately Invoked Function Expression
+(function() {
+    const message = "This is an IIFE example.";
+    console.log(message);
+})();
+
+// Another IIFE example
+(function(name) {
+    console.log(`Hello, ${name}! This is an IIFE example.`);
+})("Aditya");
+
+// IIFE with parameters
+(function(a, b) {
+    console.log(`The sum of ${a} and ${b} is ${a + b}.`);
+})(5, 10);
+
+// IIFE with return value
+(function(a, b) {
+    return a * b;
+})(4, 5); // Output: 20
+
+// IIFE with arrow function
+(() => {
+    const greeting = "Hello from an IIFE with arrow function!";
+    console.log(greeting);
+})();
+
+// IIFE with arrow function and parameters
+((name) => {
+    console.log(`Hello, ${name}! This is an IIFE with arrow function.`);
+})("Aditya");
+
+// IIFE with arrow function and return value
+((a, b) => {
+    return a - b;
+})(10, 5); // Output: 5
+
+// IIFE ATM example
+const atm = (function(initialBalance){
+  let balance = initialBalance;
+  return {
+    deposit: function(amount) {
+      if(amount <= 0) {
+        console.log("Amount should be greater than 0");
+      } else {
+        balance += amount;
+        console.log(`Deposited: ${amount}. New balance: ${balance}`);
+      }
+    },
+    withdraw: function(amount) {
+      if(amount > balance) {
+        console.log("Insufficient balance");
+      } else {
+        balance -= amount;
+        console.log(`Withdrawn: ${amount}. New balance: ${balance}`);
+      }
+    },
+    checkBalance: function() {
+      console.log(`Current balance: ${balance}`);
+    }
+  };
+})(100); // Initial balance set to 100
+
+// Example usage:
+atm.checkBalance();
+atm.deposit(50);
+atm.withdraw(30);
+atm.withdraw(200);
+atm.deposit(-10);
+atm.checkBalance();
