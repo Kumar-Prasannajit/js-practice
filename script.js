@@ -303,3 +303,96 @@ atm.withdraw(30);
 atm.withdraw(200);
 atm.deposit(-10);
 atm.checkBalance();
+
+// IIFE with private variables
+const counterIIFE = (function() {
+    let count = 0;
+
+    return {
+        increment: function() {
+            count++;
+            console.log(`Count: ${count}`);
+        },
+        decrement: function() {
+            count--;
+            console.log(`Count: ${count}`);
+        },
+        getCount: function() {
+            return count;
+        }
+    };
+})();
+
+//Iterators
+function makeIterator(start=0, end=Infinity, step=1) {
+  let current = start;
+  return {
+    next: function() {
+      if (current < end) {
+        const value = current;
+        current += step;
+        return { value, done: false };
+      } else {
+        return { done: true };
+      }
+    }
+  };
+}
+// Example usage:
+const iterator = makeIterator(0, 10, 2);
+console.log(iterator.next()); // { value: 0, done: false }
+console.log(iterator.next()); // { value: 2, done: false }
+console.log(iterator.next()); // { value: 4, done: false }
+console.log(iterator.next()); // { value: 6, done: false }
+console.log(iterator.next()); // { value: 8, done: false }
+console.log(iterator.next()); // { done: true }
+
+// Another iterator example
+function createRangeIterator(start, end, step = 1) {
+    let current = start;
+    return {
+        next: function() {
+            if (current < end) {
+                const value = current;
+                current += step;
+                return { value, done: false };
+            } else {
+                return { done: true };
+            }
+        }
+    };
+}
+
+// Example usage:
+const rangeIterator = createRangeIterator(1, 10, 2); 
+console.log(rangeIterator.next()); // { value: 1, done: false }
+console.log(rangeIterator.next()); // { value: 3, done: false }
+console.log(rangeIterator.next()); // { value: 5, done: false }
+console.log(rangeIterator.next()); // { value: 7, done: false }
+console.log(rangeIterator.next()); // { value: 9, done: false }
+console.log(rangeIterator.next()); // { done: true }
+
+// Another iterator example with a custom object
+function createObjectIterator(obj) {
+    const keys = Object.keys(obj);
+    let index = 0;
+    console.log(keys);
+
+    return {
+        next: function() {
+            if (index < keys.length) {
+                const key = keys[index++];
+                return { value: { key, value: obj[key] }, done: false }; //****** */
+            } else {
+                return { done: true };
+            }
+        }
+    };
+} 
+// Example usage:
+const myObject = { a: 1, b: 2, c: 3 };
+const objectIterator = createObjectIterator(myObject);
+console.log(objectIterator.next()); // { value: { key: 'a', value: 1 }, done: false }
+console.log(objectIterator.next()); // { value: { key: 'b', value: 2 }, done: false }
+console.log(objectIterator.next()); // { value: { key: 'c', value: 3 }, done: false }
+console.log(objectIterator.next()); // { done: true }
