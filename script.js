@@ -396,3 +396,186 @@ console.log(objectIterator.next()); // { value: { key: 'a', value: 1 }, done: fa
 console.log(objectIterator.next()); // { value: { key: 'b', value: 2 }, done: false }
 console.log(objectIterator.next()); // { value: { key: 'c', value: 3 }, done: false }
 console.log(objectIterator.next()); // { done: true }
+
+//Generator functions
+function* evenNums(){
+  yield 0;
+  yield 2; 
+  yield 4;
+  yield 6;
+  yield 8;
+  yield 10;
+}
+
+// Example usage:
+const evenIterator = evenNums();
+for (const num of evenIterator) {
+    console.log(num); // Output: 0, 2, 4, 6, 8, 10
+}
+
+// Another generator function example
+function* fibonacci(n) {
+    let a = 0, b = 1;
+    for (let i = 0; i < n; i++) {
+        yield a;
+        [a, b] = [b, a + b];
+    }
+}
+// Example usage:
+const fibIterator = fibonacci(10);
+for (const num of fibIterator) {
+    console.log(num); // Output: 0, 1, 1, 2, 3, 5, 8, 13, 21, 34
+}
+
+// Another generator function example with a custom object
+function* objectGenerator(obj) {
+    for (const key in obj) {
+        if (obj.hasOwnProperty(key)) {
+            yield { key, value: obj[key] };
+        }
+    }
+}
+// Example usage:
+const myObj = { a: 1, b: 2, c: 3 };
+const objGen = objectGenerator(myObj);
+console.log(objGen);
+for (const item of objGen) {
+    console.log(item); // Output: { key: 'a', value: 1 }, { key: 'b', value: 2 }, { key: 'c', value: 3 }
+}
+
+// Another generator function example with a range
+function* rangeGenerator(start, end, step = 1) {
+    for (let i = start; i < end; i += step) {
+        yield i;
+    }
+}
+// Example usage:
+const rangeGen = rangeGenerator(1, 10, 2);
+for (const num of rangeGen) {
+    console.log(num); // Output: 1, 3, 5, 7, 9
+}
+
+// Another generator function example with a custom sequence
+function* customSequenceGenerator() {
+    let current = 1;
+    while (true) {
+        yield current;
+        current += 2; // Generates odd numbers
+    }
+}
+// Example usage:
+const customSeqGen = customSequenceGenerator();
+console.log(customSeqGen.next().value); // Output: 1
+console.log(customSeqGen.next().value); // Output: 3
+console.log(customSeqGen.next().value); // Output: 5
+
+// Another generator function example with a custom sequence and a limit
+function* limitedSequenceGenerator(limit) {
+    let current = 1;
+    let count = 0;
+    while (count < limit) {
+        yield current;
+        current += 2; // Generates odd numbers
+        count++;
+    }
+}
+// Example usage:
+const limitedSeqGen = limitedSequenceGenerator(5);
+for (const num of limitedSeqGen) {
+    console.log(num); // Output: 1, 3, 5, 7, 9
+}
+
+// Another generator function example with a custom sequence and a condition
+function* conditionalSequenceGenerator(condition) {
+    let current = 1;
+    while (current <= 100) {
+        if (condition(current)) {
+            yield current;
+        }
+        current++;
+    }
+}
+// Example usage:
+const isEven = (num) => num % 2 === 0;
+const conditionalSeqGen = conditionalSequenceGenerator(isEven);
+for (const num of conditionalSeqGen) {
+    console.log(num); // Output: 2, 4, 6, ..., 100 (even numbers up to 100)
+}
+
+// Another generator function example with a custom sequence and a callback
+function* callbackSequenceGenerator(callback) {
+    let current = 1;
+    while (current <= 10) {
+        yield callback(current);
+        current++;
+    }
+}
+// Example usage:
+const Square = (num) => num * num;
+const callbackSeqGen = callbackSequenceGenerator(Square);
+for (const num of callbackSeqGen) {
+    console.log(num); // Output: 1, 4, 9, 16, 25, 36, 49, 64, 81, 100 (squares of numbers from 1 to 10)
+}
+
+// Another generator function example with a custom sequence and a filter
+function* filterSequenceGenerator(sequence, filterFn) {
+    for (const item of sequence) {
+        if (filterFn(item)) {
+            yield item;
+        }
+    }
+}
+// Example usage:
+const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+const isOdd = (num) => num % 2 !== 0;
+const filterSeqGen = filterSequenceGenerator(numbers, isOdd);
+for (const num of filterSeqGen) {
+    console.log(num); // Output: 1, 3, 5, 7, 9 (odd numbers from the array)
+}
+
+// Another generator function example with a custom sequence and a transformation
+function* transformSequenceGenerator(sequence, transformFn) {
+    for (const item of sequence) {
+        yield transformFn(item);
+    }
+}
+// Example usage:
+const words = ["hello", "world", "javascript", "generator"];
+const toUpperCase = (word) => word.toUpperCase();
+const transformSeqGen = transformSequenceGenerator(words, toUpperCase);
+for (const word of transformSeqGen) {
+    console.log(word); // Output: "HELLO", "WORLD", "JAVASCRIPT", "GENERATOR" (words in uppercase)
+}
+
+// Another generator function example with a custom sequence and a combination of filter and transformation
+function* filterAndTransformSequenceGenerator(sequence, filterFn, transformFn) {
+    for (const item of sequence) {
+        if (filterFn(item)) {
+            yield transformFn(item);
+        }
+    }
+}
+// Example usage:
+const mixedNumbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+const isEvenNumber = (num) => num % 2 === 0;
+const double = (num) => num * 2;
+const filterAndTransformSeqGen = filterAndTransformSequenceGenerator(mixedNumbers, isEvenNumber, double);
+for (const num of filterAndTransformSeqGen) {
+    console.log(num); // Output: 4, 8, 12, 16, 20 (even numbers doubled)
+}
+
+// Generator function with DOM
+const btn = document.getElementById("btn");
+function* buttonClickGenerator() {
+    btn.innerText = "start fom 1";
+    let count = 1;
+    while(true){
+        yield count;
+        count++;
+    }
+}
+const clickGen = buttonClickGenerator();
+btn.addEventListener("click", () => {
+    const nextValue = clickGen.next().value;
+    btn.innerText = `Clicked ${nextValue} times`;
+});
