@@ -624,3 +624,134 @@ asyncFunction().then((result) => {
 // After 1 second, the Promise resolves with the string "This is an async function."
 // The `asyncFunction` is called, and we use `.then()` to handle the resolved value.
 
+//more types of functions
+const generatorFunction = function* () {
+    yield "This is a generator function.";
+}
+// Example usage:
+const gen = generatorFunction();
+console.log(gen.next().value); // Output: "This is a generator function."
+
+const higherOrderFunction = (callback) => {
+    console.log("This is a higher-order function.");
+    callback();
+}
+// Example usage:
+higherOrderFunction(() => {
+    console.log("This is a callback function.");
+}); // Output: "This is a higher-order function." followed by "This is a callback function."
+
+const immediatelyInvokedFunction = (function() {
+    console.log("This is an immediately invoked function.");
+})(); 
+// Output: "This is an immediately invoked function."
+
+const recursiveFunction = function factorial(n) {
+    if (n <= 1) {
+        return 1;
+    }
+    return n * factorial(n - 1);
+}
+// Example usage:
+console.log(factorial(5)); // Output: 120 (5! = 5 * 4 * 3 * 2 * 1)
+
+// Function with default parameters
+function greet(name = "Guest") {
+    console.log(`Hello, ${name}!`);
+}
+// Example usage:
+greet(); // Output: "Hello, Guest!"
+greet("Aditya"); // Output: "Hello, Aditya!"
+
+// Function with rest parameters
+function sum(...numbers) {
+    return numbers.reduce((acc, num) => acc + num, 0);
+}
+// Example usage:
+console.log(sum(1, 2, 3, 4, 5)); // Output: 15 (1 + 2 + 3 + 4 + 5)
+
+// Function with spread operator
+function Multiply(a, b, c) {
+    return a * b * c;
+}
+// Example usage:
+const Numbers = [2, 3, 4];
+console.log(Multiply(...Numbers)); // Output: 24 (2 * 3 * 4)
+
+// Function with destructuring parameters
+function displayUser({ name, age }) {
+    console.log(`Name: ${name}, Age: ${age}`);
+}
+// Example usage:
+const user = { name: "Aditya", age: 25 };
+displayUser(user); // Output: "Name: Aditya, Age: 25"
+
+// Function with object destructuring and default values
+function displayProduct({ name, price = 0, category = "General" }) {
+    console.log(`Product: ${name}, Price: $${price}, Category: ${category}`);
+}
+// Example usage:
+const product = { name: "Laptop", price: 999 };
+displayProduct(product); // Output: "Product: Laptop, Price: $999, Category: General"
+
+// Function with array destructuring
+function displayCoordinates([x, y]) {
+    console.log(`X: ${x}, Y: ${y}`);
+}
+// Example usage:
+const coordinates = [10, 20];
+displayCoordinates(coordinates); // Output: "X: 10, Y: 20"
+
+// Function with array destructuring and default values
+function displayPoint([x = 0, y = 0] = []) {
+    console.log(`Point: (${x}, ${y})`);
+}
+// Example usage:
+displayPoint(); // Output: "Point: (0, 0)"  
+displayPoint([5, 10]); // Output: "Point: (5, 10)"
+
+// Function with callback
+function processData(data, callback) {
+    const processedData = data.map(item => item * 2);
+    callback(processedData);
+}
+// Example usage:
+const data = [1, 2, 3, 4, 5];
+processData(data, (result) => {
+    console.log("Processed Data:", result); // Output: "Processed Data: [2, 4, 6, 8, 10]"
+});
+
+// Function with promise
+function fetchData(url) {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            if (url) {
+                resolve(`Data fetched from ${url}`);
+            } else {
+                reject("Error: URL is required");
+            }
+        }, 1000);
+    });
+}
+// Example usage:
+fetchData("https://api.example.com/data")
+    .then((data) => {
+        console.log(data); // Output: "Data fetched from https://api.example.com/data" after 1 second
+    })
+    .catch((error) => {
+        console.error(error); // Output: "Error: URL is required" if no URL is provided
+    });
+
+// Function with async/await
+async function fetchDataAsync(url) {
+    try {
+        const data = await fetchData(url);
+        console.log(data); // Output: "Data fetched from https://api.example.com/data" after 1 second
+    } catch (error) {
+        console.error(error); // Output: "Error: URL is required" if no URL is provided
+    }
+}
+// Example usage:
+fetchDataAsync("https://api.example.com/data");
+fetchDataAsync(); // Output: "Error: URL is required"
+
