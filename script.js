@@ -579,3 +579,48 @@ btn.addEventListener("click", () => {
     const nextValue = clickGen.next().value;
     btn.innerText = `Clicked ${nextValue} times`;
 });
+
+// simple function
+function simpleFunction() {
+    console.log("This is a simple function.");
+}
+
+// Example usage:
+simpleFunction(); // Output: "This is a simple function."
+
+// various types of functions
+const arrowFunction = () => {
+    console.log("This is an arrow function.");
+}
+// Example usage:
+arrowFunction(); // Output: "This is an arrow function."
+
+const namedFunction = function namedFunc() {
+    console.log("This is a named function.");
+}
+// Example usage:
+namedFunction(); // Output: "This is a named function."
+
+const anonymousFunction = function() {
+    console.log("This is an anonymous function.");
+}
+// Example usage:
+anonymousFunction(); // Output: "This is an anonymous function."
+
+const asyncFunction = async () => {
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            resolve("This is an async function.");
+        }, 1000);
+    });
+}
+// Example usage:
+asyncFunction().then((result) => {
+    console.log(result); // Output: "This is an async function." after 1 second
+});
+// expanation of above code
+// The `asyncFunction` is an asynchronous function that returns a Promise.
+// Inside the function, we use `setTimeout` to simulate an asynchronous operation.
+// After 1 second, the Promise resolves with the string "This is an async function."
+// The `asyncFunction` is called, and we use `.then()` to handle the resolved value.
+
