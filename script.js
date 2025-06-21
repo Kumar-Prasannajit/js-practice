@@ -755,3 +755,26 @@ async function fetchDataAsync(url) {
 fetchDataAsync("https://api.example.com/data");
 fetchDataAsync(); // Output: "Error: URL is required"
 
+//string exceptions example
+function validateString(str) {
+    if (typeof str !== 'string') {
+        throw new TypeError('Input must be a string');
+    }
+    if (str.length === 0) {
+        throw new Error('String cannot be empty');
+    }
+    return `Valid string: ${str}`;
+}
+// Example usage:
+try {
+    console.log(validateString("Hello, World!")); // Output: "Valid string: Hello, World!"
+    console.log(validateString("")); // Throws Error: "String cannot be empty"
+} catch (error) {
+    console.error(error.message); // Output: "String cannot be empty"
+}
+
+try {
+    console.log(validateString(123)); // Throws TypeError: "Input must be a string"
+} catch (error) {
+    console.error(error.message); // Output: "Input must be a string"
+}
