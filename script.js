@@ -778,3 +778,19 @@ try {
 } catch (error) {
     console.error(error.message); // Output: "Input must be a string"
 }
+
+//exception examples in the comparision operator
+function compareValues(a, b) {
+    if (typeof a !== 'number' || typeof b !== 'number') {
+        throw new TypeError('Both values must be numbers');
+    }
+    return a === b ? 'Values are equal' : 'Values are not equal';
+}
+// Example usage:
+try {
+    console.log(compareValues(5, 5)); // Output: "Values are equal"
+    console.log(compareValues(5, 10)); // Output: "Values are not equal"
+    console.log(compareValues(5, '5')); // Throws TypeError: "Both values must be numbers"
+} catch (error) {
+    console.error(error.message); // Output: "Both values must be numbers"
+}
