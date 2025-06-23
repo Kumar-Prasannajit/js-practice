@@ -794,3 +794,19 @@ try {
 } catch (error) {
     console.error(error.message); // Output: "Both values must be numbers"
 }
+
+//interview problems
+// Problem: Reverse a string
+function reverseString(str) {
+    if (typeof str !== 'string') {
+        throw new TypeError('Input must be a string');
+    }
+    return str.split('').reverse().join('');
+}
+// Example usage:
+try {
+    console.log(reverseString("Hello, World!")); // Output: "!dlroW ,olleH"
+    console.log(reverseString(123)); // Throws TypeError: "Input must be a string"
+} catch (error) {
+    console.error(error.message); // Output: "Input must be a string"
+}
