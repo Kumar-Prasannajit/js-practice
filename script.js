@@ -754,3 +754,31 @@ async function fetchDataAsync(url) {
 // Example usage:
 fetchDataAsync("https://api.example.com/data");
 fetchDataAsync(); // Output: "Error: URL is required"
+
+// examples of async await
+async function fetchUserData(userId) {
+    try {
+        const response = await fetch(`https://jsonplaceholder.typicode.com/users/${userId}`);
+        if (!response.ok) {
+            throw new Error(`Error fetching user data: ${response.statusText}`);
+        }
+        const userData = await response.json();
+        console.log(`User ID: ${userData.id}, Name: ${userData.name}`);
+    } catch (error) {
+        console.error(error);
+    }
+}
+// Example usage:
+fetchUserData(1); // Fetches user data for user ID 1
+fetchUserData(999); // Fetches user data for a non-existent user ID, will
+
+
+// throw an error and log it to the console
+// Example of async/await with a delay
+async function delayedMessage() {
+    console.log("Starting...");
+    await new Promise(resolve => setTimeout(resolve, 2000)); // Wait for 2 seconds
+    console.log("This message is displayed after a delay of 2 seconds.");
+}
+// Example usage:
+delayedMessage(); // Output: "Starting..." followed by "This message is displayed after a delay of 2 seconds." after 2 seconds
